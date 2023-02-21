@@ -3,6 +3,7 @@ package ru.savkins.bankApp.model;
 
 import jakarta.persistence.*;
 
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.data.annotation.Id;
@@ -11,7 +12,7 @@ import org.springframework.data.annotation.Id;
 @Entity
 @Table(name="questions")
 public class Question extends AuditModel{
-    @Id
+    @EmbeddedId
     @GeneratedValue(generator="question_generator")
     @SequenceGenerator(
             name="question_generator",
@@ -20,7 +21,7 @@ public class Question extends AuditModel{
     )
     private Long id;
 
-    @NotBlank
+    @NotNull
     @Size(min=3, max=100)
     private String title;
 

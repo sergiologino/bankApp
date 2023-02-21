@@ -9,7 +9,7 @@ import ru.savkins.bankApp.model.Answer;
 import ru.savkins.bankApp.repository.AnswerRepository;
 import ru.savkins.bankApp.repository.QuestionRepository;
 
-import java.lang.module.ResolutionException;
+// import java.lang.module.ResolutionException;
 import java.util.List;
 
 @RestController
@@ -28,12 +28,12 @@ public class AnswerController {
 
     @PostMapping("/questions/{questionId}/answers")
     public Answer addAnswer(@PathVariable Long questionId,
-                            @Valid @RequestBody Answer answer) {
+                            @Valid @RequestBody Answer answer) throws ResourceNotFoundException {
         return questionRepository.findById(questionId)
                 .map(question -> {
                     answer.setQuestion(question);
                     return answerRepository.save(answer);
-                }).orElseThrow(()->new ResourceNotFoundException("Question not found with id"));
+                }).orElseThrow(()-> new ResourceNotFoundException("Question not found with id"));
     }
 
     @PutMapping("/question/{questionId}/answers/{answerId}")
@@ -47,7 +47,7 @@ public class AnswerController {
                 .map(answer -> {
                     answer.setText(answerRequest.getText());
                     return answerRepository.save(answer);
-                }).orElseThrow(()-> new ResourceNotFoundException("Answer not found with id"+answerId));
+                }).orElseThrow(()-> new ResourceNotFoundException("Answer not found with id "+answerId));
     }
     @DeleteMapping("/questions/{questionId}/answers/{answerId}")
     public ResponseEntity<?> deleteAnswer(@PathVariable Long questionId,

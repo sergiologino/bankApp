@@ -2,7 +2,7 @@ package ru.savkins.bankApp.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Entity;
-import javax.persistence.*;
+import jakarta.persistence.*;
 import jakarta.persistence.Id;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -10,7 +10,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name="answers")
 public class Answer extends AuditModel{
-    @Id
+    @EmbeddedId
     @GeneratedValue(generator="answer_generator")
     @SequenceGenerator(
             name="answer_generator",

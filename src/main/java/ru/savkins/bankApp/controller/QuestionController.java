@@ -26,7 +26,7 @@ public class QuestionController {
     }
     @PutMapping("/questions/{questionId}")
         public Question updateQuestion(@PathVariable Long questionId,
-                                       @Valid @RequestBody Question questionRequest) {
+                                       @Valid @RequestBody Question questionRequest) throws ResourceNotFoundException {
         return questionRepository.findById(questionId)
                 .map(question -> {
                     question.setTitle(questionRequest.getTitle());
