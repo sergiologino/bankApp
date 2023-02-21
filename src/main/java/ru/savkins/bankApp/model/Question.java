@@ -23,7 +23,7 @@ public class Question extends AuditModel{
     @NotBlank
     @Size(min=3, max=100)
     private String title;
-    
+
     @Column(columnDefinition = "text")
     private String description;
 
